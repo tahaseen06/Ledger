@@ -80,9 +80,7 @@ def validate_number(v, field):
 # --------------------------------------------------------------------------- authorisation
 def _authorize(actor, kind, src, dst):
     """Decided by the server, per request, from the database state read under the write lock."""
-    role = actor["role"]
-    if role == "auditor":
-        return False
+    role = actor["role"]        # anything not explicitly allowed below (auditors included) is denied
     if kind == "deposit":      # cash-in is an operator action; holders cannot mint money
         return role == "admin"
     if kind == "withdrawal":   # operator adjustment, or the owner taking money out

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LedgerLine</title>
+<style>
+ body{font:15px/1.5 system-ui,sans-serif;margin:0;background:#f6f7f9;color:#1b1f24}
+ header{background:#12263f;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+ main{max-width:960px;margin:20px auto;padding:0 16px}
+ section{background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;margin-bottom:16px}
+ h2{margin:0 0 10px;font-size:16px}
+ input,select,button{font:inherit;padding:6px 8px;margin:2px}
+ button{cursor:pointer;background:#12263f;color:#fff;border:0;border-radius:5px}
+ button:disabled{opacity:.5}
+ table{border-collapse:collapse;width:100%} th,td{border-bottom:1px solid #eee;padding:5px 8px;text-align:left;font-size:13px}
+ .num{text-align:right;font-variant-numeric:tabular-nums} .refused{background:#fff3f0} .flag{color:#b45309}
+ #msg{padding:8px 12px;border-radius:6px;margin-bottom:12px;display:none} .ok{background:#e6f6ec;display:block!important} .err{background:#fde8e6;display:block!important}
+ .hidden{display:none}
+</style></head><body>
+<header><b>LedgerLine</b><span id="who"></span></header>
+<main>
+ <div id="msg"></div>
+ <section id="login"><h2>Sign in</h2>
+  <input id="u" placeholder="username" autocomplete="username"><input id="p" type="password" placeholder="password" autocomplete="current-password">
+  <button id="loginBtn">Sign in</button></section>
+ <div id="app" class="hidden">
+  <section><h2>Accounts</h2><table id="accts"></table></section>
+  <section id="moveBox"><h2>Move money</h2>
+   <select id="kind"></select>
+   <input id="from" placeholder="from account"><input id="to" placeholder="to account">
+   <input id="amt" placeholder="amount (INR)" size="12"><button id="go">Submit</button>
+   <div><small>Each submission carries an Idempotency-Key; a retry or double-click cannot pay twice.</small></div></section>
+  <section><h2>Statement <span id="stNo"></span></h2><table id="stmt"></table></section>
+  <section id="auditBox" class="hidden"><h2>Audit</h2>
+   <button id="verifyBtn">Verify ledger</button> <button id="flagBtn">Flagged</button> <button id="refBtn">Refused</button> <button id="repBtn">Replays</button>
+   <pre id="auditOut" style="white-space:pre-wrap;font-size:12px"></pre></section>
+  <button id="logout">Sign out</button>
+ </div>
+</main>
+<script src="/static/app.js"></script>
+</body></html>
